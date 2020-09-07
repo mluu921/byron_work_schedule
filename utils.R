@@ -45,17 +45,13 @@ load_data <- function() {
       levels = c("Mon", 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
                  'Sun')
     ))
+
   
-  temp <- data %>%
-    filter(
-      date %in% seq(mdy('1/1/2020'), mdy('12/31/2020'), '1 day')
-    )
-  
-  temp <- temp %>%
+  data <- data %>%
     mutate(
       today = ifelse(date == date(todays_date), 1, 0) %>% factor(),
       work = factor(work, levels = c('OFF', 'WORK'), labels = c('WORK', 'OFF'))
     )
   
-  return(temp)
+  return(data)
 }

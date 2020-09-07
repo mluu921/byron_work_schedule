@@ -5,9 +5,8 @@ account: mluu921
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2730742
-bundleId: 3594775
+bundleId: 3600674
 url: https://mluu921.shinyapps.io/isbyronworking/
-when: 1599260311.27638
+when: 1599446355.23434
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: app.Rmd|byron_work_schedule.csv|byron_work_schedule.R
