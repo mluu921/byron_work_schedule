@@ -2,7 +2,7 @@ library(tidyverse)
 library(shiny)
 library(shinydashboard)
 library(lubridate)
-library(plotly)
+library(rmarkdown)
 
 options(shiny.autoreload = T)
 
@@ -10,21 +10,14 @@ source('utils.R')
 
 data <- load_data()
 
-# disclaimer_message <- 'HAVE YOU EVER BEEN A VICTIM OF NOT KNOWING WHETHER MR. NG IS WORKING, OR HAS THE
-# DAY OFF? WELL FEAR NO MORE. THIS REVOLUTIONARY WEB APPLICATION WILL EASILY 
-# LET YOU KNOW THE ANSWER YOU SO DESIRE. \n\n\n
-# 
-# DISCLAIMER: NO GURANTEES ON THE ACCURACY AND VALIDITY OF THE WORK.
-# '
-
 dashboard_header <- dashboardHeader(title = 'IS BYRON NG WORKING?')
-dashboard_sidebar <- dashboardSidebar(
-  disable = T
-  )
+
+dashboard_sidebar <- dashboardSidebar(disable = T)
 
 dashboard_body <- dashboardBody(
   fluidRow(
-    # box(disclaimer_message, collapsed = T, collapsible = T, title = 'README'),
+    box(collapsed = F, collapsible = T, title = 'NOTICE', width = 12,
+        uiOutput('readme_message')),
     infoBoxOutput('infobox_todays_date', width = 12),
     infoBoxOutput('infobox_isheworkingtoday', width = 12),
     infoBoxOutput('infobox_isheworkingtomorrow', width = 12),
@@ -61,7 +54,9 @@ dashboard_body <- dashboardBody(
       collapsible = T,
       collapsed = T,
       DT::dataTableOutput('table_off_this_year')
-    )
+    ),
+    box(collapsed = T, collapsible = T, title = 'MOTIVATION/DEDICATION', width = 12,
+        uiOutput('inspiration_dedication')),
   )
 )
 
@@ -313,6 +308,18 @@ server <- function(input, output, session) {
       color = color,
       icon = icon(selected_icon)
     )
+    
+  })
+  
+  output$readme_message <- renderUI({
+    
+    shiny::includeHTML('readme_message.html') 
+    
+  })
+  
+  output$inspiration_dedication <- renderUI({
+    
+    shiny::includeHTML('inspiration_message.html') 
     
   })
   

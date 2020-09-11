@@ -1,0 +1,12 @@
+---
+title: ""
+output: html_document
+---
+
+> Have you ever been a victim of Mr. Ng's inconsistent and ridiculously difficult to remember work schedule? Have you tried to make plans with Mr. Ng, just to be shot down that he is unfortunately working that day? Have you ever had an argument with your wife trying to figure out whether Mr. Ng is working this weekend or not?
+
+> If any of the above sounds familiar, then this web application is dedicated to you - the friends, the family, and the loved ones that have ever been a victim of the atrocities of Mr. Ng's work schedule. The capacity and potential of this sophisticated web application is endless, and **WILL** save lives and may even contribute to the development of a COVID19 vaccine and end the global pandemic. The posibilities are endless, but most important of all, this web application **WILL** save your relationship.
+
+> Never again will you have to wonder, never again will you have to contemplate, never again will you have to argue and or debate on whether Mr. Ng is working this day ever again. 
+
+- Michael Luu (@mluu921)
