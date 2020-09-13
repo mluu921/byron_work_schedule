@@ -10,7 +10,7 @@ source('utils.R')
 
 data <- load_data()
 
-dashboard_header <- dashboardHeader(title = 'IS BYRON NG WORKING?')
+dashboard_header <- dashboardHeader(title = 'IS BYRON NG WORKING?', titleWidth = 300)
 
 dashboard_sidebar <- dashboardSidebar(disable = T)
 
