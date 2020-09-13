@@ -8,6 +8,8 @@ options(shiny.autoreload = T)
 
 source('utils.R')
 
+todays_date <- Sys.time() - hours(7)
+
 data <- load_data()
 
 dashboard_header <- dashboardHeader(title = 'IS BYRON NG WORKING?', titleWidth = 300)
@@ -16,47 +18,66 @@ dashboard_sidebar <- dashboardSidebar(disable = T)
 
 dashboard_body <- dashboardBody(
   fluidRow(
-    box(collapsed = F, collapsible = T, title = 'NOTICE', width = 12,
-        uiOutput('readme_message')),
-    infoBoxOutput('infobox_todays_date', width = 12),
-    infoBoxOutput('infobox_isheworkingtoday', width = 12),
-    infoBoxOutput('infobox_isheworkingtomorrow', width = 12),
-    infoBoxOutput('infobox_isheworkingweekend', width = 12),
-    box(
-      title = 'CURRENT MONTH CALENDAR',
+    column(
       width = 12,
-      status = 'primary',
-      collapsible = T,
-      plotOutput('calendar_this_month')
+      box(collapsed = F, collapsible = T, title = 'NOTICE', width = 12,
+          uiOutput('readme_message')),
+      infoBoxOutput('infobox_todays_date', width = 12)
+    )
+  ),
+  fluidRow(
+    column(
+      width = 4,
+      infoBoxOutput('infobox_isheworkingtoday', width = 12)
     ),
-    box(
-      title = "CHECK SPECIFIC DAY",
+    column(
+      width = 4,
+      infoBoxOutput('infobox_isheworkingtomorrow', width = 12)
+    ),
+    column(
+      width = 4,
+      infoBoxOutput('infobox_isheworkingweekend', width = 12)
+    )
+  ),
+  fluidRow(
+    column(
       width = 12,
-      status = 'primary',
-      collapsible = T,
-      collapsed = F,
-      dateInput('selected_date', label = '', format = 'mm-dd-yyyy'),
-      infoBoxOutput('infobox_check_date', width = 12)
-      
-    ),
-    box(
-      title = "DAYS OFF THIS MONTH",
-      width = 12,
-      status = 'primary',
-      collapsible = T,
-      collapsed = T,
-      DT::dataTableOutput('table_off_this_month')
-    ),
-    box(
-      title = "DAYS OFF THIS YEAR",
-      width = 12,
-      status = 'primary',
-      collapsible = T,
-      collapsed = T,
-      DT::dataTableOutput('table_off_this_year')
-    ),
-    box(collapsed = T, collapsible = T, title = 'MOTIVATION/DEDICATION', width = 12,
-        uiOutput('inspiration_dedication')),
+      box(
+        title = "CHECK SPECIFIC DAY",
+        width = 12,
+        status = 'primary',
+        collapsible = T,
+        collapsed = F,
+        dateInput('selected_date', label = '', format = 'mm-dd-yyyy'),
+        infoBoxOutput('infobox_check_date', width = 12)
+        
+      ),
+      box(
+        title = 'CURRENT MONTH CALENDAR',
+        width = 12,
+        status = 'primary',
+        collapsible = T,
+        plotOutput('calendar_this_month')
+      ),
+      box(
+        title = "DAYS OFF THIS MONTH",
+        width = 12,
+        status = 'primary',
+        collapsible = T,
+        collapsed = T,
+        DT::dataTableOutput('table_off_this_month')
+      ),
+      box(
+        title = "DAYS OFF THIS YEAR",
+        width = 12,
+        status = 'primary',
+        collapsible = T,
+        collapsed = T,
+        DT::dataTableOutput('table_off_this_year')
+      ),
+      box(collapsed = T, collapsible = T, title = 'MOTIVATION/DEDICATION', width = 12,
+          uiOutput('inspiration_dedication'))
+    )
   )
 )
 
@@ -68,8 +89,6 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output, session) {
-  
-  todays_date <- Sys.time() - hours(7)
   
   output$infobox_todays_date <- renderInfoBox({
     
