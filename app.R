@@ -50,7 +50,6 @@ dashboard_body <- dashboardBody(
         collapsed = F,
         dateInput('selected_date', label = '', format = 'mm-dd-yyyy'),
         infoBoxOutput('infobox_check_date', width = 12)
-        
       ),
       box(
         title = 'CURRENT MONTH CALENDAR',
@@ -59,22 +58,31 @@ dashboard_body <- dashboardBody(
         collapsible = T,
         plotOutput('calendar_this_month')
       ),
-      box(
-        title = "DAYS OFF THIS MONTH",
+      tabBox(
         width = 12,
-        status = 'primary',
-        collapsible = T,
-        collapsed = T,
-        DT::dataTableOutput('table_off_this_month')
+        title = 'DAYS OFF',
+        tabPanel(
+          title = paste0(month(todays_date, label = T, abbr = F), ' ', year(todays_date)), DT::dataTableOutput('table_off_this_month')),
+        tabPanel(
+          title = paste0(year(todays_date)), DT::dataTableOutput('table_off_this_year')
+        )
       ),
-      box(
-        title = "DAYS OFF THIS YEAR",
-        width = 12,
-        status = 'primary',
-        collapsible = T,
-        collapsed = T,
-        DT::dataTableOutput('table_off_this_year')
-      ),
+      # box(
+      #   title = "DAYS OFF THIS MONTH",
+      #   width = 12,
+      #   status = 'primary',
+      #   collapsible = T,
+      #   collapsed = T,
+      #   DT::dataTableOutput('table_off_this_month')
+      # ),
+      # box(
+      #   title = "DAYS OFF THIS YEAR",
+      #   width = 12,
+      #   status = 'primary',
+      #   collapsible = T,
+      #   collapsed = T,
+      #   DT::dataTableOutput('table_off_this_year')
+      # ),
       box(collapsed = T, collapsible = T, title = 'MOTIVATION/DEDICATION', width = 12,
           uiOutput('inspiration_dedication'))
     )
